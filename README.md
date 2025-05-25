@@ -1,3 +1,59 @@
+# Partner API & Supplier Portal
+
+This repository contains the documentation for ShopJimmy's Partner API and the
+upcoming supplier portal. The API currently supports token based authentication
+and operations for searching parts, placing orders and retrieving order status.
+
+## Current Capabilities
+
+- Obtain a JWT token via `/token`.
+- Search for parts with `/search`.
+- Create an order using `/order`.
+- Check order status at `/order/{reference}`.
+
+The Markdown files in this repo provide request and response examples for each
+endpoint.
+
+## Supplier Portal (Work in Progress)
+
+Suppliers will log in to a dedicated portal where they can monitor sales and
+payouts. Planned features include:
+
+- Recent sales totals with a list of best‑selling parts (sortable by tag or
+  category).
+- Estimated payout amounts that adjust when returns are processed.
+- Return reporting with reasons and photo uploads for defective items.
+- Tracking the counts of defective versus good boards in each shipment.
+- Contract file storage and optional annual review fields.
+- A performance score based on return rate, consignment percentage, fee handling
+  and defect rates. Suppliers can adjust their consignment percentage or fees to
+  improve their score.
+- Admin approval of payouts, which will eventually trigger an ACH payment
+  automatically. Until the banking integration is complete, payments are marked
+  manually.
+- A payout breakdown for each part so suppliers understand the deductions.
+- End customer information is hidden; only the destination city and state (or a
+  map view) are shown.
+
+## Outstanding Tasks
+- Implement supplier authentication and login pages.
+- Build a dashboard showing recent sales totals and best-selling parts with category or tag filters.
+- Display payout estimates that update with returns and include a per-part breakdown.
+- Provide return reporting with reasons, photo uploads, and counts of defective versus good boards.
+- Store supplier contracts with metadata and optional annual review dates.
+- Develop the performance scoring formula and show each supplier's score.
+- Allow suppliers to adjust consignment percentages and fee splits to improve that score.
+- Support admin payout approvals and integrate ACH payments when ready.
+- Hide end customer details by only showing destination city/state or a map.
+- Maintain a development server for ongoing portal testing.
+- Build the supplier dashboard and pages outlined above.
+- Implement the scoring formula and expose it to suppliers.
+- Allow suppliers to adjust consignment percentages and fee splits.
+- Finalize contract upload and storage with metadata for annual review.
+- Connect payment approvals to ACH once the banking integration is ready.
+- Provide a development server for ongoing testing.
+
+
 # just-the-docs-template
 
 This is a *bare-minimum* template to create a [Jekyll] site that:
