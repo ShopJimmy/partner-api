@@ -19,6 +19,28 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IlE...
 Content-Type: application/json
 ```
 
+### Node.js Example Request
+```javascript
+// Node.js 18+ example using the built-in fetch API
+async function fetchInvoice(invoiceId) {
+  const response = await fetch(`https://base.shopjimmy.com/api/partner/v1/invoice/${invoiceId}`, {
+    headers: {
+      Authorization: 'Bearer YOUR_ACCESS_TOKEN',
+      'Content-Type': 'application/json'
+    }
+  });
+
+  if (!response.ok) {
+    throw new Error(`Invoice request failed with status ${response.status}`);
+  }
+
+  const data = await response.json();
+  console.log(data);
+}
+
+fetchInvoice(123456).catch(console.error);
+```
+
 ### 200 Response
 ```json
 {
