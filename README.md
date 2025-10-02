@@ -7,9 +7,12 @@ and operations for searching parts, placing orders and retrieving order status.
 ## Current Capabilities
 
 - Obtain a JWT token via `/token`.
-- Search for parts with `/search`.
-- Create an order using `/order`.
-- Check order status at `/order/{reference}`.
+- Search for parts with `/search` and inspect a single listing with `/listing/{listing_id}`.
+- Request available carrier services with `/shippingQuote`.
+- Create an order using `/order` and request a cancellation with `/order/{reference}/request-cancel`.
+- Retrieve order history with `/orders` and detailed order status at `/order/{reference}`.
+- Review credits with `/credits`.
+- Retrieve invoice summaries with `/invoices` and full invoice details with `/invoice/{id}`.
 
 The Markdown files in this repo provide request and response examples for each
 endpoint.

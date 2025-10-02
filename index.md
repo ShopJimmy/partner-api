@@ -16,8 +16,23 @@ Each order request must include the corresponding shipping service name and carr
 
 ---
 ### Billing
-All fulfilled orders will be invoiced electronically at a later time. 
+All fulfilled orders will be invoiced electronically at a later time.
 The billing address for each order will reference the API account information associated with your account.
+
+---
+
+### Available Endpoints
+- [Authentication](authentication.html)
+- [Search Listings](search.html)
+- [Listing Details](listing.html)
+- [Shipping Quote](shipping-quote.html)
+- [Create Order](order.html)
+- [Request Order Cancellation](order-request-cancel.html)
+- [Order History](orders.html)
+- [Order Status](order-status.html)
+- [Credits](credits.html)
+- [Invoices](invoices.html)
+- [Invoice Details](invoice.html)
 
 **Interact with our API using Swagger.io**
 
