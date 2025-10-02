@@ -3,16 +3,15 @@ title: Order Status
 layout: default
 ---
 
-## API Authentication
+## Authentication
 
-To get an order's status using the Partner API, include the Authorization header in your HTTP request. 
-The Authorization header should contain a Bearer token, which is necessary to authenticate your search requests.
+Provide the `Authorization` header with a bearer token from the [`/token` endpoint](authentication.html) to query order status.
 
 ## Usage
-This action will show you an order's various timestamps of events, and also any packages that have been shipped including the items within.
-You will only be able to see orders that you've placed with your partner account.
 
-### GET Request to retrieve order
+The endpoint returns lifecycle timestamps, line items, invoices, credits, returns, and shipment packages associated with an order placed by your partner account.
+
+### Request
 ```plaintext
 GET /api/partner/v1/order/{order_reference} HTTP/1.1
 Host: base.shopjimmy.com
@@ -20,10 +19,86 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IlE...
 Content-Type: application/json
 ```
 
+### Node.js Example Request
+```javascript
+// Node.js 18+ example using the built-in fetch API
+async function fetchOrderStatus(orderReference) {
+  const response = await fetch(`https://base.shopjimmy.com/api/partner/v1/order/${orderReference}`, {
+    headers: {
+      Authorization: 'Bearer YOUR_ACCESS_TOKEN',
+      'Content-Type': 'application/json'
+    }
+  });
+
+  if (!response.ok) {
+    throw new Error(`Order status request failed with status ${response.status}`);
+  }
+
+  const data = await response.json();
+  console.log(data);
+}
+
+fetchOrderStatus('PAPI3ZAABG36JWR').catch(console.error);
+```
+
 ### 200 Response
-```js
+```json
 {
   "reference": "PAPI3ZAABG36JWR",
+  "po_number": "PO-12345",
+  "total": 199.95,
+  "note": "Purchase Order: PO-12345",
+  "items": [
+    {
+      "listing_id": 438195,
+      "sku": "sj-62661-2",
+      "qty": 1,
+      "paid": 99.98,
+      "tax": 0
+    }
+  ],
+  "credits": [
+    {
+      "reason": "Damaged in transit",
+      "amount": 10.0,
+      "created_at": "2024-08-09T14:20:00.000Z"
+    }
+  ],
+  "invoices": [
+    {
+      "id": 555432,
+      "items": [
+        {
+          "listing_id": 438195,
+          "sku": "sj-62661-2",
+          "qty": 1,
+          "price": 99.98,
+          "tax": 0
+        }
+      ],
+      "total": 99.98,
+      "tax": 0,
+      "shipping": 0,
+      "discount": 0,
+      "created_at": "2024-08-07T13:24:02.000Z"
+    }
+  ],
+  "returns": [
+    {
+      "id": 321,
+      "created_at": "2024-08-10T10:12:00.000Z",
+      "credited_at": null,
+      "denied_at": null,
+      "items": [
+        {
+          "listing_id": 438195,
+          "sku": "sj-62661-2",
+          "amount": 99.98,
+          "qty": 1
+        }
+      ]
+    }
+  ],
   "created_at": "2024-08-07T13:24:02.000Z",
   "shipped_at": "2024-08-08T21:28:00.000Z",
   "canceled_at": null,
@@ -45,12 +120,15 @@ Content-Type: application/json
       "destination_country": "US",
       "destination_telephone": "877-881-6492",
       "destination_business": "ShopJimmy.com",
+      "destination_email": "annie@example.com",
       "items": [
         {
           "listing_id": 438195,
           "sku": "sj-62661-2",
           "qty": 1,
-          "serial": null
+          "serial": null,
+          "part_number": "62661-2",
+          "substituted": false
         }
       ]
     }
@@ -58,15 +136,16 @@ Content-Type: application/json
 }
 ```
 
-### 400 Response
-```js
+### 404 Response
+The order reference was not found for your account.
+```json
 {
-  "error": "Validation failed ... reason ..."
+  "error": "Order not found."
 }
 ```
 
 ### 500 Response
-```js
+```json
 {
   "error": "There was an internal server error. Please contact administrator."
 }
