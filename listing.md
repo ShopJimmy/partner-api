@@ -3,16 +3,15 @@ title: Listing Details
 layout: default
 ---
 
-## API Authentication
+## Authentication
 
-To retrieve a listing using the Partner API, include the `Authorization` header in your HTTP request.
-The `Authorization` header must contain a Bearer token that you obtained from the [`/token` endpoint](authentication.html).
+Include the `Authorization` header with a bearer token obtained from the [`/token` endpoint](authentication.html) to retrieve listing details.
 
 ## Usage
-Provide the numeric `listing_id` returned by the [`/search` endpoint](search.html) to fetch pricing, images, and compatibility
-details for a single listing.
 
-### GET Request to retrieve a listing
+Provide the numeric `listing_id` returned from the [`/search` endpoint](search.html) to access pricing, imagery, and compatibility metadata for a single listing.
+
+### Request
 ```plaintext
 GET /api/partner/v1/listing/{listing_id} HTTP/1.1
 Host: base.shopjimmy.com
@@ -79,7 +78,7 @@ fetchListing(336076).catch(console.error);
 ```
 
 ### 404 Response
-Returned when the listing cannot be found.
+The requested listing identifier was not found.
 ```json
 {
   "error": "Listing not found"

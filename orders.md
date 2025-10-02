@@ -3,16 +3,15 @@ title: Order History
 layout: default
 ---
 
-## API Authentication
+## Authentication
 
-To retrieve order history using the Partner API, include the `Authorization` header in your HTTP request.
-The `Authorization` header must contain a Bearer token that you obtained from the [`/token` endpoint](authentication.html).
+Include the `Authorization` header with a bearer token from the [`/token` endpoint](authentication.html) to retrieve order history.
 
 ## Usage
-Returns orders created for your partner account within the requested look-back window. Use the optional `days` query parameter
-to control the look-back window (defaults to 30 days). Each order includes key metadata plus line items and timestamps.
 
-### GET Request to retrieve orders
+Fetch orders created under your partner account within a configurable look-back window. Use the optional `days` query parameter to adjust the timeframe (defaults to 30 days). Each record includes order metadata, line items, and key timestamps.
+
+### Request
 ```plaintext
 GET /api/partner/v1/orders?days=7 HTTP/1.1
 Host: base.shopjimmy.com

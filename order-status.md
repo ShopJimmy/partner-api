@@ -3,16 +3,15 @@ title: Order Status
 layout: default
 ---
 
-## API Authentication
+## Authentication
 
-To get an order's status using the Partner API, include the `Authorization` header in your HTTP request.
-The `Authorization` header must contain a Bearer token that you obtained from the [`/token` endpoint](authentication.html).
+Provide the `Authorization` header with a bearer token from the [`/token` endpoint](authentication.html) to query order status.
 
 ## Usage
-This action returns timestamps for order lifecycle events, a snapshot of the order items, invoices, credits, returns, and every
-package that has shipped. You can only retrieve orders that were placed by your partner account.
 
-### GET Request to retrieve order
+The endpoint returns lifecycle timestamps, line items, invoices, credits, returns, and shipment packages associated with an order placed by your partner account.
+
+### Request
 ```plaintext
 GET /api/partner/v1/order/{order_reference} HTTP/1.1
 Host: base.shopjimmy.com
@@ -138,7 +137,7 @@ fetchOrderStatus('PAPI3ZAABG36JWR').catch(console.error);
 ```
 
 ### 404 Response
-Returned when the order is not found for your account.
+The order reference was not found for your account.
 ```json
 {
   "error": "Order not found."

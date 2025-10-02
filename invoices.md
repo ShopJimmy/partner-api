@@ -3,16 +3,15 @@ title: Invoices
 layout: default
 ---
 
-## API Authentication
+## Authentication
 
-To retrieve invoices using the Partner API, include the `Authorization` header in your HTTP request.
-The `Authorization` header must contain a Bearer token that you obtained from the [`/token` endpoint](authentication.html).
+Include the `Authorization` header with a bearer token from the [`/token` endpoint](authentication.html) to retrieve invoice summaries.
 
 ## Usage
-Returns invoices issued for orders placed by your partner account. Use the optional `days` query parameter to control the
-look-back window (defaults to 30 days). The invoice summary includes the original order metadata and each invoiced line item.
 
-### GET Request to retrieve invoices
+The endpoint returns invoices issued for orders placed by your partner account. Use the optional `days` query parameter to configure the look-back window (defaults to 30 days). Each invoice summary includes originating order details and all invoiced line items.
+
+### Request
 ```plaintext
 GET /api/partner/v1/invoices?days=30 HTTP/1.1
 Host: base.shopjimmy.com

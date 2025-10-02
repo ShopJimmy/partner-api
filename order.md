@@ -3,18 +3,17 @@ title: Place Order
 layout: default
 ---
 
-## API Authentication
+## Authentication
 
-To place an order using the Partner API, include the `Authorization` header in your HTTP request.
-The `Authorization` header must contain a Bearer token that you obtained from the [`/token` endpoint](authentication.html).
+Include the `Authorization` header with a bearer token from the [`/token` endpoint](authentication.html) to submit orders.
 
 ## Usage
-Most billing information is taken from your partner account profile. The payload supplies destination details, the requested
-carrier/service, and the line items from your search results. Provide a valid shipping phone number and at least one line item.
 
-Use the [`/shippingQuote` endpoint](shipping-quote.html) to see which methods are enabled for your account.
+Billing information is derived from your partner profile. Provide shipment details, the desired carrier service, and the line items sourced from search results. A valid shipping phone number and at least one line item are required.
 
-### POST Request to place order
+Use the [`/shippingQuote` endpoint](shipping-quote.html) to confirm which carrier services are enabled for your account.
+
+### Request
 ```plaintext
 POST /api/partner/v1/order HTTP/1.1
 Host: base.shopjimmy.com
@@ -22,7 +21,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IlE...
 Content-Type: application/json
 ```
 
-### Body JSON definition
+### Request Body
 ```json
 {
   "po_number": "Optional PO number shown on packing slips",
@@ -99,7 +98,7 @@ createOrder().catch(console.error);
 ```
 
 ### 400 Response
-Returned when the payload does not satisfy validation.
+Returned when payload validation fails.
 ```json
 {
   "error": "Validation failed {\"context\":{\"label\":\"ship_method\",\"value\":null}}"

@@ -3,15 +3,15 @@ title: Invoice Details
 layout: default
 ---
 
-## API Authentication
+## Authentication
 
-To retrieve a specific invoice using the Partner API, include the `Authorization` header in your HTTP request.
-The `Authorization` header must contain a Bearer token that you obtained from the [`/token` endpoint](authentication.html).
+Include the `Authorization` header with a bearer token from the [`/token` endpoint](authentication.html) to retrieve individual invoices.
 
 ## Usage
-Provide the numeric invoice `id` from the [`/invoices` endpoint](invoices.html) to fetch the full invoice record.
 
-### GET Request to retrieve an invoice
+Provide the numeric invoice `id` returned by the [`/invoices` endpoint](invoices.html) to fetch the complete invoice record.
+
+### Request
 ```plaintext
 GET /api/partner/v1/invoice/{invoice_id} HTTP/1.1
 Host: base.shopjimmy.com
@@ -78,7 +78,7 @@ fetchInvoice(123456).catch(console.error);
 ```
 
 ### 404 Response
-Returned when the invoice cannot be found.
+The specified invoice identifier does not exist.
 ```json
 {
   "error": "Invoice not found"
