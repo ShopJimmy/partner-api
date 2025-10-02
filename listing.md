@@ -45,13 +45,6 @@ Content-Type: application/json
       ]
     }
   ],
-  "substitutes": [
-    {
-      "manufacturer": "Hisense",
-      "part_number": "RUNTK0488FVZA",
-      "stock": 4
-    }
-  ],
   "image": "https://cdn.example.com/2021-10-25-20-16-52-ShopJimmy-RUNTK0488FVZZ-TOP.jpg",
   "images": [
     {
