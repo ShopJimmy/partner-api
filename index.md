@@ -3,21 +3,18 @@ title: Briefing
 layout: home
 ---
 
-## REST API Concept
-The production endpoint for the Partner API is currently **https://base.shopjimmy.com/api/partner/v1**
+## REST API Overview
+The Partner API production base URL is **https://base.shopjimmy.com/api/partner/v1**.
 
-To access the API, your application must be approved, and an account must be set up on our server. 
-Once approved, you will receive a client_id and client_secret, enabling you to begin development using our designated development endpoint.
+Access is restricted to approved applications. After onboarding, you will receive a `client_id` and `client_secret`, allowing you to begin integration against the designated development environment.
 
 ---
-### Shipping 
-You are required to provide access for our carrier accounts to ship using your services. 
-Each order request must include the corresponding shipping service name and carrier details.
+### Shipping
+Partners must authorize our carrier accounts to tender shipments under their services. Each order request must identify the requested carrier and service level.
 
 ---
 ### Billing
-All fulfilled orders will be invoiced electronically at a later time.
-The billing address for each order will reference the API account information associated with your account.
+Fulfilled orders are invoiced electronically. Billing details on each order reference the API account associated with the integration.
 
 ---
 
@@ -34,10 +31,10 @@ The billing address for each order will reference the API account information as
 - [Invoices](invoices.html)
 - [Invoice Details](invoice.html)
 
-**Interact with our API using Swagger.io**
+**Explore the API with Swagger.io**
 
-[download our swagger.json]
+[Download the swagger.json specification]
 
 ----
 
-[download our swagger.json]: https://shopjimmy.github.io/partner-api/swagger.json
+[Download the swagger.json specification]: https://shopjimmy.github.io/partner-api/swagger.json

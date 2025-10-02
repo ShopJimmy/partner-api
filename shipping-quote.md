@@ -3,16 +3,15 @@ title: Shipping Quote
 layout: default
 ---
 
-## API Authentication
+## Authentication
 
-To request shipping methods using the Partner API, include the `Authorization` header in your HTTP request.
-The `Authorization` header must contain a Bearer token that you obtained from the [`/token` endpoint](authentication.html).
+Include the `Authorization` header with a bearer token from the [`/token` endpoint](authentication.html) when requesting shipping quotes.
 
 ## Usage
-Returns the carrier services that are enabled for your partner account based on the shipping accounts on file. The payload
-should include the destination address so the request can be validated.
 
-### POST Request to retrieve shipping methods
+The endpoint returns the carrier services available to your partner account based on the shipping credentials on file. Provide the destination address in the request payload so the service list can be validated.
+
+### Request
 ```plaintext
 POST /api/partner/v1/shippingQuote HTTP/1.1
 Host: base.shopjimmy.com
@@ -20,7 +19,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IlE...
 Content-Type: application/json
 ```
 
-### Body JSON definition
+### Request Body
 ```json
 {
   "destination_address_1": "123 Warehouse Way",

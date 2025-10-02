@@ -3,20 +3,17 @@ title: Search
 layout: default
 ---
 
-## API Authentication
+## Authentication
 
-To perform search operations using the Partner API, include the `Authorization` header in your HTTP request.
-The `Authorization` header must contain a Bearer token that you obtained from the [`/token` endpoint](authentication.html).
+Provide the `Authorization` header with a bearer token from the [`/token` endpoint](authentication.html) to execute search requests.
 
 ## Usage
-Search queries are supplied in the `q` query parameter. Results are limited to the first 100 matches for the provided term, so
-refine your query to narrow the response set. The `id` that is returned for each listing is used when creating an order.
 
-The characters `/`, `.`, and `-` are stripped from both the query and the search index and all matches are case insensitive.
+Pass the search term in the `q` query parameter. Results include up to the first 100 matches; refine the term to narrow the response set. The returned `id` for each listing is required when placing orders.
 
-Each result contains summary pricing, availability, and compatibility information in addition to part and image metadata.
+During indexing, the characters `/`, `.`, and `-` are removed and matching is case-insensitive. Each result provides summary pricing, availability, compatibility details, and related imagery.
 
-### GET Request to search parts
+### Request
 ```plaintext
 GET /api/partner/v1/search?q=PaRtNum83r HTTP/1.1
 Host: base.shopjimmy.com

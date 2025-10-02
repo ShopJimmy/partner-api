@@ -1,174 +1,130 @@
 # Partner API & Supplier Portal
 
-This repository contains the documentation for ShopJimmy's Partner API and the
-upcoming supplier portal. The API currently supports token based authentication
-and operations for searching parts, placing orders and retrieving order status.
+This repository hosts the public documentation for ShopJimmy’s Partner API and the forthcoming supplier portal. The API currently supports token-based authentication along with core workflows such as part discovery, order placement, order lifecycle management, and post-sale reconciliation.
 
-## Current Capabilities
+## API Features
 
-- Obtain a JWT token via `/token`.
-- Search for parts with `/search` and inspect a single listing with `/listing/{listing_id}`.
-- Request available carrier services with `/shippingQuote`.
-- Create an order using `/order` and request a cancellation with `/order/{reference}/request-cancel`.
-- Retrieve order history with `/orders` and detailed order status at `/order/{reference}`.
-- Review credits with `/credits`.
-- Retrieve invoice summaries with `/invoices` and full invoice details with `/invoice/{id}`.
+The Partner API presently offers the following capabilities:
 
-The Markdown files in this repo provide request and response examples for each
-endpoint.
+- Request a JSON Web Token from `/token` for authenticated access.
+- Discover inventory through `/search` and review individual listings via `/listing/{listing_id}`.
+- Retrieve shipping service options with `/shippingQuote`.
+- Submit new purchase orders to `/order` and initiate cancellations through `/order/{reference}/request-cancel`.
+- Access historical orders with `/orders` and view detailed status updates at `/order/{reference}`.
+- Review credit memos using `/credits`.
+- Summarize invoices with `/invoices` and obtain full invoice detail from `/invoice/{id}`.
 
-## Supplier Portal (Work in Progress)
+Each Markdown page in this repository includes representative requests and responses for the corresponding endpoint.
 
-Suppliers will log in to a dedicated portal where they can monitor sales and
-payouts. Planned features include:
+## Supplier Portal Roadmap
 
-- Recent sales totals with a list of best‑selling parts (sortable by tag or
-  category).
-- Estimated payout amounts that adjust when returns are processed.
-- Return reporting with reasons and photo uploads for defective items.
-- Tracking the counts of defective versus good boards in each shipment.
-- Contract file storage and optional annual review fields.
-- A performance score based on return rate, consignment percentage, fee handling
-  and defect rates. Suppliers can adjust their consignment percentage or fees to
-  improve their score.
-- Admin approval of payouts, which will eventually trigger an ACH payment
-  automatically. Until the banking integration is complete, payments are marked
-  manually.
-- A payout breakdown for each part so suppliers understand the deductions.
-- End customer information is hidden; only the destination city and state (or a
-  map view) are shown.
+Suppliers will ultimately engage through a dedicated portal to monitor commercial performance and payments. Planned functionality includes:
 
-## Outstanding Tasks
-- Implement supplier authentication and login pages.
-- Build a dashboard showing recent sales totals and best-selling parts with category or tag filters.
-- Display payout estimates that update with returns and include a per-part breakdown.
-- Provide return reporting with reasons, photo uploads, and counts of defective versus good boards.
-- Store supplier contracts with metadata and optional annual review dates.
-- Develop the performance scoring formula and show each supplier's score.
-- Allow suppliers to adjust consignment percentages and fee splits to improve that score.
-- Support admin payout approvals and integrate ACH payments when ready.
-- Hide end customer details by only showing destination city/state or a map.
-- Maintain a development server for ongoing portal testing.
-- Build the supplier dashboard and pages outlined above.
-- Implement the scoring formula and expose it to suppliers.
-- Allow suppliers to adjust consignment percentages and fee splits.
-- Finalize contract upload and storage with metadata for annual review.
-- Connect payment approvals to ACH once the banking integration is ready.
-- Provide a development server for ongoing testing.
+- A dashboard highlighting recent sales volume and top-performing parts with tag and category filters.
+- Dynamic payout projections that reflect return activity and provide per-part breakdowns.
+- Return management with reason codes, supporting imagery, and tracking of good versus defective boards.
+- Secure storage for supplier contracts, associated metadata, and optional annual review reminders.
+- A performance score informed by return rates, consignment mix, fee handling, and defect ratios, accompanied by tools for suppliers to adjust consignment and fee settings.
+- Administrative payout approval flows that will ultimately connect to automated ACH disbursements; manual confirmation will remain available until the banking integration is complete.
+- A transparent deduction summary for every part on a payout.
+- Protection of end-customer privacy by presenting only destination city and state (or an equivalent map view).
 
+## Remaining Work
 
-# just-the-docs-template
+- Implement supplier authentication and login experiences.
+- Build the supplier dashboard, including sales summaries and top-part analytics.
+- Deliver interactive payout estimates with per-part insights.
+- Complete return reporting, defect tracking, and supporting photo uploads.
+- Finalize contract upload, storage, and metadata capture with annual review reminders.
+- Develop, expose, and tune the performance scoring formula.
+- Enable supplier-controlled adjustments to consignment percentages and fee allocations.
+- Complete the administrative payout approval flow and integrate ACH payments when the banking provider is ready.
+- Continue operating a dedicated development environment for ongoing portal testing.
 
-This is a *bare-minimum* template to create a [Jekyll] site that:
+---
 
-- uses the [Just the Docs] theme;
-- can be built and published on [GitHub Pages];
-- can be built and previewed locally, and published on other platforms.
+# Just the Docs Template
 
-More specifically, the created site:
+This repository was bootstrapped from the *Just the Docs* Jekyll template. The template provides a minimal starting point that:
 
-- uses a gem-based approach, i.e. uses a `Gemfile` and loads the `just-the-docs` gem;
-- uses the [GitHub Pages / Actions workflow] to build and publish the site on GitHub Pages.
+- Applies the [Just the Docs] theme via a gem-based installation.
+- Supports local previewing, GitHub Pages publication, and other static hosting workflows.
+- Ships with a preconfigured [GitHub Pages / Actions workflow] for automated builds and deployments.
 
-To get started with creating a site, simply:
+To create a new documentation site from this template:
 
-1. click "[use this template]" to create a GitHub repository
-2. go to Settings > Pages > Build and deployment > Source, and select GitHub Actions
+1. Select **Use this template** to generate a new GitHub repository.
+2. Navigate to **Settings → Pages → Build and deployment → Source** and choose **GitHub Actions**.
 
-If you want to maintain your docs in the `docs` directory of an existing project repo, see [Hosting your docs from an existing project repo](#hosting-your-docs-from-an-existing-project-repo).
+If you prefer to keep documentation inside an existing project repository, review [Hosting your docs from an existing project repo](#hosting-your-docs-from-an-existing-project-repo).
 
-After completing the creation of your new site on GitHub, update it as needed:
+After provisioning the new site, tailor the provided content:
 
-## Replace the content of the template pages
+## Update the Default Pages
 
-Update the following files to your own content:
+Replace the placeholder content in the following files with project-specific information:
 
-- `index.md` (your new home page)
-- `README.md` (information for those who access your site repo on GitHub)
+- `index.md` for the public landing page.
+- `README.md` for repository-level guidance.
 
-## Changing the version of the theme and/or Jekyll
+## Adjusting Theme or Jekyll Versions
 
-Simply edit the relevant line(s) in the `Gemfile`.
+Modify the relevant entries in the `Gemfile` to pin alternate versions of Jekyll or the theme.
 
-## Adding a plugin
+## Adding Additional Plugins
 
-The Just the Docs theme automatically includes the [`jekyll-seo-tag`] plugin.
+The template enables the [`jekyll-seo-tag`] plugin by default. To add another plugin, update both the `Gemfile` and `_config.yml`. For example, to include [`jekyll-default-layout`]:
 
-To add an extra plugin, you need to add it in the `Gemfile` *and* in `_config.yml`. For example, to add [`jekyll-default-layout`]:
-
-- Add the following to your site's `Gemfile`:
+- Append the following to the `Gemfile`:
 
   ```ruby
   gem "jekyll-default-layout"
   ```
 
-- And add the following to your site's `_config.yml`:
+- Add the plugin to `_config.yml`:
 
   ```yaml
   plugins:
     - jekyll-default-layout
   ```
 
-Note: If you are using a Jekyll version less than 3.5.0, use the `gems` key instead of `plugins`.
+For Jekyll versions earlier than 3.5.0, use the `gems` key instead of `plugins`.
 
-## Publishing your site on GitHub Pages
+## Publishing on GitHub Pages
 
-1.  If your created site is `YOUR-USERNAME/YOUR-SITE-NAME`, update `_config.yml` to:
+1.  If your repository is `YOUR-USERNAME/YOUR-SITE-NAME`, configure `_config.yml` with:
 
     ```yaml
     title: YOUR TITLE
     description: YOUR DESCRIPTION
-    theme: just-the-docs
-
-    url: https://YOUR-USERNAME.github.io/YOUR-SITE-NAME
-
-    aux_links: # remove if you don't want this link to appear on your pages
-      Template Repository: https://github.com/YOUR-USERNAME/YOUR-SITE-NAME
     ```
 
-2.  Push your updated `_config.yml` to your site on GitHub.
+2.  Execute `bundle install` to install dependencies.
 
-3.  In your newly created repo on GitHub:
-    - go to the `Settings` tab -> `Pages` -> `Build and deployment`, then select `Source`: `GitHub Actions`.
-    - if there were any failed Actions, go to the `Actions` tab and click on `Re-run jobs`.
+3.  Run `bundle exec jekyll serve` to compile the site and preview it locally at `localhost:4000`. The generated output is stored in the `_site` directory.
 
-## Building and previewing your site locally
+## Publishing to Alternate Platforms
 
-Assuming [Jekyll] and [Bundler] are installed on your computer:
+To deploy the site to another hosting provider, publish the contents of the `_site` directory.
 
-1.  Change your working directory to the root directory of your site.
+## Customization Guidance
 
-2.  Run `bundle install`.
+The template is intentionally lightweight; adapt the structure, styling, and content as required for your documentation project. Additional customization resources are available in the [Just the Docs documentation][Just the Docs].
 
-3.  Run `bundle exec jekyll serve` to build your site and preview it at `localhost:4000`.
+## Hosting Documentation Within an Existing Repository
 
-    The built site is stored in the directory `_site`.
+If you prefer to manage documentation within a project’s primary repository, copy the template files into a `docs` directory and adjust the provided GitHub Actions workflow accordingly. Clone the template locally or download the `.zip` archive to access the files.
 
-## Publishing your built site on a different platform
+### Copy Required Files
 
-Just upload all the files in the directory `_site`.
+1.  Create a `.github/workflows` directory at the repository root if one does not already exist, and copy `pages.yml` into it so GitHub Actions can locate the workflow definition.
+2.  Create a `docs` directory at the repository root and copy the remaining template files into that location.
 
-## Customization
+### Update the GitHub Actions Workflow
 
-You're free to customize sites that you create with this template, however you like!
+The `pages.yml` workflow must be updated so that build and deploy steps execute within the `docs` directory.
 
-[Browse our documentation][Just the Docs] to learn more about how to use this theme.
-
-## Hosting your docs from an existing project repo
-
-You might want to maintain your docs in an existing project repo. Instead of creating a new repo using the [just-the-docs template](https://github.com/just-the-docs/just-the-docs-template), you can copy the template files into your existing repo and configure the template's Github Actions workflow to build from a `docs` directory. You can clone the template to your local machine or download the `.zip` file to access the files.
-
-### Copy the template files
-
-1.  Create a `.github/workflows` directory at your project root if your repo doesn't already have one. Copy the `pages.yml` file into this directory. GitHub Actions searches this directory for workflow files.
-
-2.  Create a `docs` directory at your project root and copy all remaining template files into this directory.
-
-### Modify the GitHub Actions workflow
-
-The GitHub Actions workflow that builds and deploys your site to Github Pages is defined by the `pages.yml` file. You'll need to edit this file to that so that your build and deploy steps look to your `docs` directory, rather than the project root.
-
-1.  Set the default `working-directory` param for the build job.
+1.  Set the default `working-directory` for the build job:
 
     ```yaml
     build:
@@ -178,28 +134,28 @@ The GitHub Actions workflow that builds and deploys your site to Github Pages is
           working-directory: docs
     ```
 
-2.  Set the `working-directory` param for the Setup Ruby step.
+2.  Specify the `working-directory` for the **Setup Ruby** step:
 
     ```yaml
     - name: Setup Ruby
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: '3.1'
-          bundler-cache: true
-          cache-version: 0
-          working-directory: '${{ github.workspace }}/docs'
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: '3.1'
+        bundler-cache: true
+        cache-version: 0
+        working-directory: '${{ github.workspace }}/docs'
     ```
 
-3.  Set the path param for the Upload artifact step:
+3.  Configure the upload step to publish the generated site from `docs/_site/`:
 
     ```yaml
     - name: Upload artifact
-        uses: actions/upload-pages-artifact@v1
-        with:
-          path: "docs/_site/"
+      uses: actions/upload-pages-artifact@v1
+      with:
+        path: "docs/_site/"
     ```
 
-4.  Modify the trigger so that only changes within the `docs` directory start the workflow. Otherwise, every change to your project (even those that don't affect the docs) would trigger a new site build and deploy.
+4.  Limit workflow triggers to changes within the `docs` directory to avoid unnecessary builds:
 
     ```yaml
     on:
@@ -212,9 +168,9 @@ The GitHub Actions workflow that builds and deploys your site to Github Pages is
 
 ## Licensing and Attribution
 
-This repository is licensed under the [MIT License]. You are generally free to reuse or extend upon this code as you see fit; just include the original copy of the license (which is preserved when you "make a template"). While it's not necessary, we'd love to hear from you if you do use this template, and how we can improve it for future use!
+This template is distributed under the [MIT License], granting broad rights to reuse or extend the codebase. Please retain the original license file when creating derivatives. Feedback on enhancements or improvements is always welcome.
 
-The deployment GitHub Actions workflow is heavily based on GitHub's mixed-party [starter workflows]. A copy of their MIT License is available in [actions/starter-workflows].
+The deployment workflow derives from GitHub’s [starter workflows]; a copy of their MIT License is provided in [actions/starter-workflows].
 
 ----
 

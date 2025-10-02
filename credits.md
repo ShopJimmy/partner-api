@@ -3,16 +3,15 @@ title: Credits
 layout: default
 ---
 
-## API Authentication
+## Authentication
 
-To retrieve credits/refunds using the Partner API, include the `Authorization` header in your HTTP request.
-The `Authorization` header must contain a Bearer token that you obtained from the [`/token` endpoint](authentication.html).
+Include the `Authorization` header with a bearer token from the [`/token` endpoint](authentication.html) to retrieve credit memos.
 
 ## Usage
-Returns credit memos created for orders placed by your partner account. Use the optional `days` query parameter to control the
-look-back window (defaults to 30 days).
 
-### GET Request to retrieve credits
+The endpoint returns credits issued for orders placed by your partner account. Use the optional `days` query parameter to set the look-back window (default is 30 days).
+
+### Request
 ```plaintext
 GET /api/partner/v1/credits?days=60 HTTP/1.1
 Host: base.shopjimmy.com
