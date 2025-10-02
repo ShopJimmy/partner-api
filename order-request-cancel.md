@@ -22,6 +22,29 @@ Content-Type: application/json
 
 No body payload is required.
 
+### Node.js Example Request
+```javascript
+// Node.js 18+ example using the built-in fetch API
+async function requestOrderCancellation(orderReference) {
+  const response = await fetch(`https://base.shopjimmy.com/api/partner/v1/order/${orderReference}/request-cancel`, {
+    method: 'POST',
+    headers: {
+      Authorization: 'Bearer YOUR_ACCESS_TOKEN',
+      'Content-Type': 'application/json'
+    }
+  });
+
+  if (!response.ok) {
+    throw new Error(`Cancellation request failed with status ${response.status}`);
+  }
+
+  const data = await response.json();
+  console.log(data);
+}
+
+requestOrderCancellation('PAPI3ZAABG36JWR').catch(console.error);
+```
+
 ### 200 Response
 ```json
 {

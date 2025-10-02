@@ -24,6 +24,31 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IlE...
 Content-Type: application/json
 ```
 
+### Node.js Example Request
+```javascript
+// Node.js 18+ example using the built-in fetch API
+async function searchListings(query) {
+  const url = new URL('https://base.shopjimmy.com/api/partner/v1/search');
+  url.searchParams.set('q', query);
+
+  const response = await fetch(url, {
+    headers: {
+      Authorization: 'Bearer YOUR_ACCESS_TOKEN',
+      'Content-Type': 'application/json'
+    }
+  });
+
+  if (!response.ok) {
+    throw new Error(`Search request failed with status ${response.status}`);
+  }
+
+  const data = await response.json();
+  console.log(data);
+}
+
+searchListings('PaRtNum83r').catch(console.error);
+```
+
 ### 200 Response
 ```json
 [

@@ -47,6 +47,50 @@ Content-Type: application/json
 }
 ```
 
+### Node.js Example Request
+```javascript
+// Node.js 18+ example using the built-in fetch API
+async function createOrder() {
+  const response = await fetch('https://base.shopjimmy.com/api/partner/v1/order', {
+    method: 'POST',
+    headers: {
+      Authorization: 'Bearer YOUR_ACCESS_TOKEN',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      po_number: 'Optional PO number shown on packing slips',
+      ship_method: 'FedEx FedEx Next Day Air',
+      delivery_instructions: 'Leave at receiving desk',
+      destination_email: 'receiving@example.com',
+      destination_name: 'Robin Receiver',
+      destination_address_1: '123 Warehouse Way',
+      destination_address_2: 'Suite 100',
+      destination_city: 'Burnsville',
+      destination_state: 'MN',
+      destination_postcode: '55337',
+      destination_country: 'US',
+      destination_telephone: '8005550100',
+      destination_business: 'Warehouse Inc',
+      items: [
+        {
+          listing_id: 336076,
+          qty: 2
+        }
+      ]
+    })
+  });
+
+  if (!response.ok) {
+    throw new Error(`Order request failed with status ${response.status}`);
+  }
+
+  const data = await response.json();
+  console.log(data);
+}
+
+createOrder().catch(console.error);
+```
+
 ### 200 Response
 ```json
 {

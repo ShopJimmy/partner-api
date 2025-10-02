@@ -27,6 +27,32 @@ Content-Type: application/json
 }
 ```
 
+### Node.js Example Request
+```javascript
+// Node.js 18+ example using the built-in fetch API
+async function requestToken() {
+  const response = await fetch('https://base.shopjimmy.com/api/partner/v1/token', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      client_id: 'your_client_id',
+      client_secret: 'your_client_secret'
+    })
+  });
+
+  if (!response.ok) {
+    throw new Error(`Token request failed with status ${response.status}`);
+  }
+
+  const data = await response.json();
+  console.log(data);
+}
+
+requestToken().catch(console.error);
+```
+
 ### 200 Response
 ```json
 {
