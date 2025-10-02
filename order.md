@@ -5,14 +5,14 @@ layout: default
 
 ## API Authentication
 
-To perform place order operation using the Partner API, include the Authorization header in your HTTP request. 
-The Authorization header should contain a Bearer token, which is necessary to authenticate your search requests.
+To place an order using the Partner API, include the `Authorization` header in your HTTP request.
+The `Authorization` header must contain a Bearer token that you obtained from the [`/token` endpoint](authentication.html).
 
 ## Usage
-Most of the information we need has already been saved to your account at this point.
-All we need here is the destination information, ship method, and item information.
+Most billing information is taken from your partner account profile. The payload supplies destination details, the requested
+carrier/service, and the line items from your search results. Provide a valid shipping phone number and at least one line item.
 
-Optionally include a PO number and we will do our best to add it to the shipping label.
+Use the [`/shippingQuote` endpoint](shipping-quote.html) to see which methods are enabled for your account.
 
 ### POST Request to place order
 ```plaintext
@@ -23,40 +23,49 @@ Content-Type: application/json
 ```
 
 ### Body JSON definition
-```js
+```json
 {
-  "po_number": "string",
-  "ship_method": "string",
-  "delivery_instructions": "string",
-  "destination_email": "user@example.com",
-  "destination_name": "string",
-  "destination_address_1": "string",
-  "destination_address_2": "string",
-  "destination_city": "string",
+  "po_number": "Optional PO number shown on packing slips",
+  "ship_method": "FedEx FedEx Next Day Air",
+  "delivery_instructions": "Leave at receiving desk",
+  "destination_email": "receiving@example.com",
+  "destination_name": "Robin Receiver",
+  "destination_address_1": "123 Warehouse Way",
+  "destination_address_2": "Suite 100",
+  "destination_city": "Burnsville",
   "destination_state": "MN",
-  "destination_postcode": "string",
+  "destination_postcode": "55337",
   "destination_country": "US",
-  "destination_telephone": "string",
-  "destination_business": "string",
+  "destination_telephone": "8005550100",
+  "destination_business": "Warehouse Inc",
   "items": [
     {
-      "listing_id": 0,
-      "qty": 0
+      "listing_id": 336076,
+      "qty": 2
     }
   ]
 }
 ```
 
 ### 200 Response
-```js
+```json
 {
   "reference": "PAPI3ZAABG36JWR"
 }
 ```
 
-### 500 Response
-```js
+### 400 Response
+Returned when the payload does not satisfy validation.
+```json
 {
-  "error": "There was an internal server error. Please contact administrator."
+  "error": "Validation failed {\"context\":{\"label\":\"ship_method\",\"value\":null}}"
+}
+```
+
+### 500 Response
+```json
+{
+  "error": "There was an internal server error. Please contact administrator.",
+  "message": "Detailed failure reason"
 }
 ```
