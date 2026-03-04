@@ -27,14 +27,8 @@ Fulfilled orders are invoiced electronically. Billing details on each order refe
 - [Request Order Cancellation](order-request-cancel.html)
 - [Order History](orders.html)
 - [Order Status](order-status.html)
+- [Create Return](return.html)
 - [Credits](credits.html)
+- [Credit Details](credit.html)
 - [Invoices](invoices.html)
 - [Invoice Details](invoice.html)
-
-**Explore the API with Swagger.io**
-
-[Download the swagger.json specification]
-
-----
-
-[Download the swagger.json specification]: https://shopjimmy.github.io/partner-api/swagger.json

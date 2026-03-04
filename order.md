@@ -9,7 +9,9 @@ Include the `Authorization` header with a bearer token from the [`/token` endpoi
 
 ## Usage
 
-Billing information is derived from your partner profile. Provide shipment details, the desired carrier service, and the line items sourced from search results. A valid shipping phone number and at least one line item are required.
+Billing information is derived from your partner profile. Provide shipment details, the desired carrier service, and at least one line item sourced from search results.
+
+Schema validation requires `ship_method`, `destination_telephone`, and `items` (minimum of 1 item). Other top-level fields allow empty string (`""`) or `null`.
 
 Use the [`/shippingQuote` endpoint](shipping-quote.html) to confirm which carrier services are enabled for your account.
 
@@ -21,10 +23,28 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IlE...
 Content-Type: application/json
 ```
 
+### Validation Rules
+- `po_number`: string, max 45, optional, allows `""` and `null`
+- `ship_method`: string, max 45, required
+- `delivery_instructions`: string, max 45, optional, allows `""` and `null`
+- `destination_email`: string, optional, allows `""` and `null`
+- `destination_name`: string, max 45, optional, allows `""` and `null`
+- `destination_address_1`: string, max 50, optional, allows `""` and `null`
+- `destination_address_2`: string, max 35, optional, allows `""` and `null`
+- `destination_city`: string, max 45, optional, allows `""` and `null`
+- `destination_state`: string, max 2, optional, allows `""` and `null`
+- `destination_postcode`: string, max 15, optional, allows `""` and `null`
+- `destination_country`: string, max 2, optional, allows `""` and `null`
+- `destination_telephone`: string, max 25, required
+- `destination_business`: string, max 45, optional, allows `""` and `null`
+- `items`: array, required, minimum 1 item
+- `items[].listing_id`: integer, required when item is present
+- `items[].qty`: integer, required when item is present
+
 ### Request Body
 ```json
 {
-  "po_number": "Optional PO number shown on packing slips",
+  "po_number": "PO-1001",
   "ship_method": "FedEx FedEx Next Day Air",
   "delivery_instructions": "Leave at receiving desk",
   "destination_email": "receiving@example.com",
@@ -57,7 +77,7 @@ async function createOrder() {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-      po_number: 'Optional PO number shown on packing slips',
+      po_number: 'PO-1001',
       ship_method: 'FedEx FedEx Next Day Air',
       delivery_instructions: 'Leave at receiving desk',
       destination_email: 'receiving@example.com',
@@ -93,7 +113,7 @@ createOrder().catch(console.error);
 ### 200 Response
 ```json
 {
-  "reference": "PAPI3ZAABG36JWR"
+  "reference": "ORD7XK33D9"
 }
 ```
 

@@ -11,6 +11,8 @@ Include the `Authorization` header with a bearer token obtained from the [`/toke
 
 Provide the numeric `listing_id` returned from the [`/search` endpoint](search.html) to access pricing, imagery, and compatibility metadata for a single listing.
 
+`image` is the primary image URL when available, otherwise `null`. `images` always returns an array of image objects (`url`, `default`, `label`) sourced from listing-level images and, when needed, item-level fallback images.
+
 ### Request
 ```plaintext
 GET /api/partner/v1/listing/{listing_id} HTTP/1.1

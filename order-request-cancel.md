@@ -41,7 +41,7 @@ async function requestOrderCancellation(orderReference) {
   console.log(data);
 }
 
-requestOrderCancellation('PAPI3ZAABG36JWR').catch(console.error);
+requestOrderCancellation('ORD4DJ363HJ').catch(console.error);
 ```
 
 ### 200 Response

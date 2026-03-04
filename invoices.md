@@ -45,36 +45,66 @@ fetchInvoices().catch(console.error);
 ```json
 [
   {
-    "id": 123456,
+    "id": 393076,
     "sale": {
-      "created_at": "2024-08-07T13:24:02.000Z",
-      "reference": "PAPI3ZAABG36JWR",
-      "po_number": "PO-12345",
-      "billing_firstname": "Robin",
-      "billing_lastname": "Receiver",
-      "billing_company": "Warehouse Inc",
-      "billing_address1": "123 Warehouse Way",
-      "billing_address2": "Suite 100",
-      "billing_city": "Burnsville",
-      "billing_postcode": "55337",
-      "billing_region": "MN",
+      "created_at": "2026-03-04T00:11:22.000Z",
+      "reference": "ORD562DQ9",
+      "po_number": "PO-1009",
+      "billing_firstname": "Casey",
+      "billing_lastname": "Hoffman",
+      "billing_company": "Partner Service Group",
+      "billing_address1": "1850 Midway Ln",
+      "billing_address2": "",
+      "billing_city": "SMYRNA",
+      "billing_postcode": "37167",
+      "billing_region": "TN",
       "billing_country": "US",
-      "billing_phone": "8005550100"
+      "billing_phone": "5550100400"
     },
     "items": [
       {
-        "listing_id": 438195,
-        "sku": "sj-62661-2",
+        "sku": "sj-KIT-UN65MU6500FXZA-K3",
         "qty": 1,
-        "price": 99.98,
-        "tax": 0
+        "price": "129.99",
+        "tax": "0.00"
       }
     ],
-    "total": 99.98,
-    "tax": 0,
-    "shipping": 0,
-    "discount": 0,
-    "created_at": "2024-08-08T21:28:00.000Z"
+    "total": "129.99",
+    "tax": "0.00",
+    "shipping": "0.00",
+    "discount": "0.00",
+    "created_at": "2026-03-04T17:03:02.000Z"
+  },
+  {
+    "id": 393057,
+    "sale": {
+      "created_at": "2026-03-04T02:39:22.000Z",
+      "reference": "ORD56439QA",
+      "po_number": "PO-1010",
+      "billing_firstname": "Casey",
+      "billing_lastname": "Hoffman",
+      "billing_company": "Partner Service Group",
+      "billing_address1": "1850 Midway Ln",
+      "billing_address2": "",
+      "billing_city": "SMYRNA",
+      "billing_postcode": "37167",
+      "billing_region": "TN",
+      "billing_country": "US",
+      "billing_phone": "5550100400"
+    },
+    "items": [
+      {
+        "sku": "sj-BN96-52592A",
+        "qty": 1,
+        "price": "79.99",
+        "tax": "0.00"
+      }
+    ],
+    "total": "79.99",
+    "tax": "0.00",
+    "shipping": "0.00",
+    "discount": "0.00",
+    "created_at": "2026-03-04T16:57:02.000Z"
   }
 ]
 ```

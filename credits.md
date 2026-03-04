@@ -45,10 +45,18 @@ fetchCredits().catch(console.error);
 ```json
 [
   {
-    "reference": "PAPI3ZAABG36JWR",
-    "amount": 25.0,
-    "reason": "Missing accessories",
-    "created_at": "2024-08-10T10:12:00.000Z"
+    "id": 41341,
+    "reference": "ORD4MQ43R",
+    "amount": "44.99",
+    "reason": "Partner API Return #270",
+    "created_at": "2026-03-04T14:53:47.000Z"
+  },
+  {
+    "id": 41340,
+    "reference": "ORD4RM3Q3E",
+    "amount": "69.99",
+    "reason": "Partner API Return #278",
+    "created_at": "2026-03-04T14:49:17.000Z"
   }
 ]
 ```

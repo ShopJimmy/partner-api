@@ -1,19 +1,19 @@
 ---
-title: Order Status
+title: Credit Details
 layout: default
 ---
 
 ## Authentication
 
-Provide the `Authorization` header with a bearer token from the [`/token` endpoint](authentication.html) to query order status.
+Include the `Authorization` header with a bearer token from the [`/token` endpoint](authentication.html) to retrieve an individual credit record.
 
 ## Usage
 
-The endpoint returns lifecycle timestamps, line items, invoices, credits, returns, and shipment packages associated with an order placed by your partner account.
+Provide the order `reference` returned by the [`/credits` endpoint](credits.html) to fetch the full credited order record, including order details, invoices, returns, and package data.
 
 ### Request
 ```plaintext
-GET /api/partner/v1/order/{order_reference} HTTP/1.1
+GET /api/partner/v1/credit/{order_reference} HTTP/1.1
 Host: base.shopjimmy.com
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IlE...
 Content-Type: application/json
@@ -22,8 +22,8 @@ Content-Type: application/json
 ### Node.js Example Request
 ```javascript
 // Node.js 18+ example using the built-in fetch API
-async function fetchOrderStatus(orderReference) {
-  const response = await fetch(`https://base.shopjimmy.com/api/partner/v1/order/${orderReference}`, {
+async function fetchCreditDetails(orderReference) {
+  const response = await fetch(`https://base.shopjimmy.com/api/partner/v1/credit/${orderReference}`, {
     headers: {
       Authorization: 'Bearer YOUR_ACCESS_TOKEN',
       'Content-Type': 'application/json'
@@ -31,22 +31,22 @@ async function fetchOrderStatus(orderReference) {
   });
 
   if (!response.ok) {
-    throw new Error(`Order status request failed with status ${response.status}`);
+    throw new Error(`Credit details request failed with status ${response.status}`);
   }
 
   const data = await response.json();
   console.log(data);
 }
 
-fetchOrderStatus('ORD4DJ363HJ').catch(console.error);
+fetchCreditDetails('ORD4MQ43R').catch(console.error);
 ```
 
 ### 200 Response
 ```json
 {
-  "id": 318968,
-  "reference": "ORD4DJ363HJ",
-  "po_number": "PO-1042",
+  "id": 324477,
+  "reference": "ORD4MQ43R",
+  "po_number": "PO-1024",
   "customer_email": "ops+returns@example.com",
   "customer_name": "Harbor Technical Services",
   "shipping_address_1": "18884 Grace St",
@@ -57,76 +57,76 @@ fetchOrderStatus('ORD4DJ363HJ').catch(console.error);
   "shipping_country": "US",
   "shipping_telephone": "5550100300",
   "shipping_business": null,
-  "total": "54.99",
+  "total": "44.99",
   "note": "",
   "items": [
     {
-      "id": 279768,
-      "listing_id": 345688,
-      "sku": "sj-30370007207",
+      "id": 286004,
+      "listing_id": 328398,
+      "sku": "sj-LB65065",
       "qty": 1,
-      "paid": 54.99,
+      "paid": 44.99,
       "tax": 0
     }
   ],
   "credits": [
     {
-      "id": 41339,
-      "reason": "Partner API Return #269",
-      "amount": "54.99",
-      "created_at": "2026-03-04T14:47:01.000Z"
+      "id": 41341,
+      "reason": "Partner API Return #270",
+      "amount": "44.99",
+      "created_at": "2026-03-04T14:53:47.000Z"
     }
   ],
   "invoices": [
     {
-      "id": 224403,
+      "id": 285955,
       "items": [
         {
-          "listing_id": 345688,
-          "sku": "sj-30370007207",
+          "listing_id": 328398,
+          "sku": "sj-LB65065",
           "qty": 1,
-          "price": "54.99",
+          "price": "44.99",
           "tax": "0.00"
         }
       ],
-      "total": "54.99",
+      "total": "44.99",
       "tax": "0.00",
       "shipping": "0.00",
       "discount": "0.00",
-      "created_at": "2026-02-11T19:31:02.000Z"
+      "created_at": "2026-02-19T23:15:02.000Z"
     }
   ],
   "returns": [
     {
-      "id": 269,
-      "created_at": "2026-02-24T16:36:32.000Z",
-      "credited_at": "2026-03-04T14:47:01.000Z",
+      "id": 270,
+      "created_at": "2026-02-24T17:29:50.000Z",
+      "credited_at": "2026-03-04T14:53:47.000Z",
       "denied_at": null,
-      "reference": "ORD4DJ363HJ--1",
+      "reference": "ORD4MQ43R--1",
       "reason_class": "other",
-      "reason_description": "Defective part",
+      "reason_description": "Asurion return type 796 - Other reason (requires explanation).",
       "comment": null,
       "items": [
         {
-          "listing_id": 345688,
-          "sku": "sj-30370007207",
+          "listing_id": 328398,
+          "sku": "sj-LB65065",
           "qty": 1
         }
       ]
     }
   ],
-  "created_at": "2026-02-11T16:36:47.000Z",
-  "shipped_at": "2026-02-11T19:30:01.000Z",
+  "created_at": "2026-02-19T22:02:01.000Z",
+  "shipped_at": "2026-02-19T23:15:00.000Z",
   "canceled_at": null,
   "packages": [
     {
-      "id": 251771,
-      "created_at": "2026-02-11T19:30:01.000Z",
+      "id": 257380,
+      "created_at": "2026-02-19T23:15:00.000Z",
       "dimensions": "40x4x4",
-      "weight_lbs": 1.35,
+      "weight_lbs": 1.45,
       "carrier": "ups",
       "service": "02",
-      "tracking_number": "1Z999AA10123456890",
+      "tracking_number": "1Z999AA10123456901",
       "cost_usd": 0,
       "customer_email": "ops+returns@example.com",
       "customer_name": "Harbor Technical Services",
@@ -142,11 +142,11 @@ fetchOrderStatus('ORD4DJ363HJ').catch(console.error);
       "destination_email": "ops+returns@example.com",
       "items": [
         {
-          "listing_id": 345688,
-          "sku": "sj-30370007207",
+          "listing_id": 328398,
+          "sku": "sj-LB65065",
           "qty": 1,
           "serial": "",
-          "part_number": "30370007207",
+          "part_number": "LB65065",
           "substituted": false
         }
       ]
@@ -156,10 +156,10 @@ fetchOrderStatus('ORD4DJ363HJ').catch(console.error);
 ```
 
 ### 404 Response
-The order reference was not found for your account.
+The credit reference was not found for your account.
 ```json
 {
-  "error": "Order not found."
+  "error": "Credit not found"
 }
 ```
 
