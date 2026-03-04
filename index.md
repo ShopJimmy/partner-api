@@ -29,6 +29,5 @@ Fulfilled orders are invoiced electronically. Billing details on each order refe
 - [Order Status](order-status.html)
 - [Create Return](return.html)
 - [Credits](credits.html)
-- [Credit Details](credit.html)
 - [Invoices](invoices.html)
 - [Invoice Details](invoice.html)
