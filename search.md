@@ -13,6 +13,8 @@ Pass the search term in the `q` query parameter. Results include up to the first
 
 During indexing, the characters `/`, `.`, and `-` are removed and matching is case-insensitive. Each result provides summary pricing, availability, compatibility details, and related imagery.
 
+`image` is the primary image URL when available, otherwise `null`. `images` always returns an array of image objects (`url`, `default`, `label`) sourced from listing-level images and, when needed, item-level fallback images.
+
 ### Request
 ```plaintext
 GET /api/partner/v1/search?q=PaRtNum83r HTTP/1.1

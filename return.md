@@ -39,7 +39,7 @@ Content-Type: application/json
   "reference": "ORD4MQ43R",
   "inbound_tracking": "1Z999AA10123457012",
   "reason_class": "other",
-  "reason_description": "Asurion return type 796 - Other reason (requires explanation).",
+  "reason_description": "Defective Part",
   "items": [
     {
       "listing_id": 328398,
@@ -63,7 +63,7 @@ async function createReturn() {
       reference: 'ORD4MQ43R',
       inbound_tracking: '1Z999AA10123457012',
       reason_class: 'other',
-      reason_description: 'Asurion return type 796 - Other reason (requires explanation).',
+      reason_description: 'Defective Part',
       items: [
         {
           listing_id: 328398,

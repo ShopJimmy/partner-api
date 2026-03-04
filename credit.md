@@ -104,7 +104,7 @@ fetchCreditDetails('ORD4MQ43R').catch(console.error);
       "denied_at": null,
       "reference": "ORD4MQ43R--1",
       "reason_class": "other",
-      "reason_description": "Asurion return type 796 - Other reason (requires explanation).",
+      "reason_description": "Defective Part",
       "comment": null,
       "items": [
         {
