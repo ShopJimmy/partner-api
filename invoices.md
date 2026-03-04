@@ -53,11 +53,11 @@ fetchInvoices().catch(console.error);
       "billing_firstname": "Casey",
       "billing_lastname": "Hoffman",
       "billing_company": "Partner Service Group",
-      "billing_address1": "1850 Midway Ln",
+      "billing_address1": "100 Example Ave",
       "billing_address2": "",
-      "billing_city": "SMYRNA",
-      "billing_postcode": "37167",
-      "billing_region": "TN",
+      "billing_city": "TESTVILLE",
+      "billing_postcode": "00000",
+      "billing_region": "ZZ",
       "billing_country": "US",
       "billing_phone": "5550100400"
     },
@@ -84,11 +84,11 @@ fetchInvoices().catch(console.error);
       "billing_firstname": "Casey",
       "billing_lastname": "Hoffman",
       "billing_company": "Partner Service Group",
-      "billing_address1": "1850 Midway Ln",
+      "billing_address1": "100 Example Ave",
       "billing_address2": "",
-      "billing_city": "SMYRNA",
-      "billing_postcode": "37167",
-      "billing_region": "TN",
+      "billing_city": "TESTVILLE",
+      "billing_postcode": "00000",
+      "billing_region": "ZZ",
       "billing_country": "US",
       "billing_phone": "5550100400"
     },
@@ -115,3 +115,4 @@ fetchInvoices().catch(console.error);
   "error": "There was an internal server error. Please contact administrator."
 }
 ```
+
