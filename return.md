@@ -9,9 +9,9 @@ Include the `Authorization` header with a bearer token from the [`/token` endpoi
 
 ## Usage
 
-Submit a return request for an existing order reference. Schema validation requires `reference` and `reason_class`.
+Submit a return request for an existing order reference. Schema validation requires `reference`, `reason_class`, and at least one return item.
 
-The payload rejects unknown fields at both the top level and each `items[]` object.
+The payload rejects unknown fields at both the top level and each `items[]` object. You may optionally request a return label as part of the same call. When a label is requested, ShopJimmy derives the package `weight` and `dimensions` from the original outbound shipment, preferring a package that contained one of the returned listings.
 
 ### Request
 ```plaintext
@@ -25,13 +25,38 @@ Content-Type: application/json
 - `reference`: string, max 45, required
 - `inbound_tracking`: string, max 60, optional, allows `""` and `null`
 - `reason_class`: string, required
+- `reason_class`: allowed values
+  - `damaged_in_transit`
+  - `defective_or_failed`
+  - `wrong_item_shipped`
+  - `ordered_in_error`
+  - `missing_parts`
+  - `other`
 - `reason_description`: string, optional, allows `""` and `null`
-- `items`: array, optional
-- `items` (when provided): minimum 1 item
+- `items`: array, required
+- `items`: minimum 1 item
 - `items`: unique by `listing_id`
 - `items[].listing_id`: integer, required
 - `items[].qty`: integer, required, minimum 1
+- `return_label`: object, optional
+- `return_label.carrier_code`: string, required when `return_label` is provided, allowed values `UPS`, `FEDEX`
+- `return_label.service_code`: string, required when `return_label` is provided
+- `return_label.delivery_method`: string, required when `return_label` is provided, allowed values `download`, `email`
+- `return_label.label_format`: string, required when `delivery_method` is `download`, allowed values `GIF`, `ZPL`
+- `return_label.email_address`: string, required when `delivery_method` is `email`
 - Unknown fields: not allowed (`unknown(false)` at top level and item level)
+
+### Return Reason Options
+Use the `reason_class` key values below in your request payload:
+
+- `damaged_in_transit`: Damaged in Transit
+- `defective_or_failed`: Defective / Failed Under Warranty
+- `wrong_item_shipped`: Wrong Item Shipped
+- `ordered_in_error`: Ordered in Error
+- `missing_parts`: Missing Parts / Accessories
+- `other`: Other (Explain Below)
+
+`reason_description` is especially useful for `damaged_in_transit`, `defective_or_failed`, `missing_parts`, and `other`.
 
 ### Request Body
 ```json
@@ -45,7 +70,33 @@ Content-Type: application/json
       "listing_id": 328398,
       "qty": 1
     }
-  ]
+  ],
+  "return_label": {
+    "carrier_code": "UPS",
+    "service_code": "03",
+    "delivery_method": "download",
+    "label_format": "GIF"
+  }
+}
+```
+
+### Email Delivery Example
+```json
+{
+  "reference": "ORD4MQ43R",
+  "reason_class": "other",
+  "items": [
+    {
+      "listing_id": 328398,
+      "qty": 1
+    }
+  ],
+  "return_label": {
+    "carrier_code": "UPS",
+    "service_code": "03",
+    "delivery_method": "email",
+    "email_address": "returns@example.com"
+  }
 }
 ```
 
@@ -69,7 +120,13 @@ async function createReturn() {
           listing_id: 328398,
           qty: 1
         }
-      ]
+      ],
+      return_label: {
+        carrier_code: 'UPS',
+        service_code: '03',
+        delivery_method: 'download',
+        label_format: 'GIF'
+      }
     })
   });
 
@@ -87,21 +144,42 @@ createReturn().catch(console.error);
 ### 200 Response
 ```json
 {
-  "success": true
+  "reference": "ORD4MQ43R-0",
+  "label": {
+    "shipment_id": "1a2b3c4d5e6f",
+    "tracking_number": "1Z999AA10123456784",
+    "charges": "12.34",
+    "label_id": 123,
+    "reference": "ORD4MQ43R-0",
+    "delivery_method": "download",
+    "label_format": "GIF",
+    "label_payload": "R0lGODlh...",
+    "package": {
+      "tracking_number": "1Z999AA10123456784",
+      "label": "R0lGODlh..."
+    },
+    "errors": []
+  }
 }
 ```
+
+If `return_label` is omitted from the request, the response returns the created return reference and `label` will be `null`.
 
 ### 400 Response
 Returned when payload validation fails.
 ```json
 {
-  "error": "Validation failed {\"context\":{\"label\":\"reference\",\"value\":null}}"
+  "error": "Validation failed",
+  "details": [
+    "\"return_label.label_format\" must be one of [GIF, ZPL]"
+  ]
 }
 ```
 
 ### 500 Response
 ```json
 {
-  "error": "There was an internal server error. Please contact administrator."
+  "error": "There was an error",
+  "message": "Could not find an original shipped package for this return."
 }
 ```
