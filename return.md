@@ -11,7 +11,7 @@ Include the `Authorization` header with a bearer token from the [`/token` endpoi
 
 Submit a return request for an existing order reference. Schema validation requires `reference`, `reason_class`, and at least one return item.
 
-The payload rejects unknown fields at both the top level and each `items[]` object. You may optionally request a return label as part of the same call. When a label is requested, ShopJimmy derives the package `weight` and `dimensions` from the original outbound shipment, preferring a package that contained one of the returned listings.
+The payload rejects unknown fields at both the top level and each `items[]` object. You may optionally request a return label as part of the same call. When a label is requested, ShopJimmy derives the package `weight` and `dimensions` from the original outbound shipment, preferring a package that contained one of the returned listings. Carrier, service, and any optional return shipping account are taken from your partner configuration and are not supplied in the request body.
 
 ### Request
 ```plaintext
@@ -39,8 +39,6 @@ Content-Type: application/json
 - `items[].listing_id`: integer, required
 - `items[].qty`: integer, required, minimum 1
 - `return_label`: object, optional
-- `return_label.carrier_code`: string, required when `return_label` is provided, allowed values `UPS`, `FEDEX`
-- `return_label.service_code`: string, required when `return_label` is provided
 - `return_label.delivery_method`: string, required when `return_label` is provided, allowed values `download`, `email`
 - `return_label.label_format`: string, required when `delivery_method` is `download`, allowed values `GIF`, `ZPL`
 - `return_label.email_address`: string, required when `delivery_method` is `email`
@@ -72,8 +70,6 @@ Use the `reason_class` key values below in your request payload:
     }
   ],
   "return_label": {
-    "carrier_code": "UPS",
-    "service_code": "03",
     "delivery_method": "download",
     "label_format": "GIF"
   }
@@ -92,8 +88,6 @@ Use the `reason_class` key values below in your request payload:
     }
   ],
   "return_label": {
-    "carrier_code": "UPS",
-    "service_code": "03",
     "delivery_method": "email",
     "email_address": "returns@example.com"
   }
@@ -122,8 +116,6 @@ async function createReturn() {
         }
       ],
       return_label: {
-        carrier_code: 'UPS',
-        service_code: '03',
         delivery_method: 'download',
         label_format: 'GIF'
       }
@@ -164,6 +156,15 @@ createReturn().catch(console.error);
 ```
 
 If `return_label` is omitted from the request, the response returns the created return reference and `label` will be `null`.
+
+### Return Label Configuration
+Return labels use the partner-level defaults configured by ShopJimmy for your account:
+
+- return carrier
+- return service
+- optional return shipping account id
+
+The request only controls whether to generate a label and how that label should be delivered back to you.
 
 ### 400 Response
 Returned when payload validation fails.
