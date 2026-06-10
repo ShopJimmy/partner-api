@@ -163,6 +163,8 @@ Return labels use the partner-level defaults configured by ShopJimmy for your ac
 - return carrier
 - return service
 - optional return shipping account id
+- origin/from address from the partner app billing/contact address on file
+- destination/return-to address from ShopJimmy's warehouse configuration
 
 The request only controls whether to generate a label and how that label should be delivered back to you.
 
