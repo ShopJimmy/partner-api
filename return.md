@@ -13,6 +13,8 @@ Submit a return request for an existing order reference. Schema validation requi
 
 The payload rejects unknown fields at both the top level and each `items[]` object. You may optionally request a return label as part of the same call. When a label is requested, ShopJimmy derives the package `weight` and `dimensions` from the original outbound shipment, preferring a package that contained one of the returned listings. Carrier, service, and any optional return shipping account are taken from your partner configuration and are not supplied in the request body.
 
+If a return label is generated, the return's `inbound_tracking` is automatically set from that label's tracking number. You do not need to send `inbound_tracking` in the request when using `return_label`. The `inbound_tracking` request field is only for cases where you are creating a return without generating a label and already know the inbound tracking number.
+
 ### Request
 ```plaintext
 POST /api/partner/v1/return HTTP/1.1
@@ -24,6 +26,8 @@ Content-Type: application/json
 ### Validation Rules
 - `reference`: string, max 45, required
 - `inbound_tracking`: string, max 60, optional, allows `""` and `null`
+  - Use this only when creating a return without `return_label` and you already have the inbound tracking number.
+  - When `return_label` is requested, the created label's tracking number is stored as `inbound_tracking` automatically.
 - `reason_class`: string, required
 - `reason_class`: allowed values
   - `damaged_in_transit`
@@ -60,7 +64,6 @@ Use the `reason_class` key values below in your request payload:
 ```json
 {
   "reference": "ORD4MQ43R",
-  "inbound_tracking": "1Z999AA10123457012",
   "reason_class": "other",
   "reason_description": "Defective Part",
   "items": [
@@ -106,7 +109,6 @@ async function createReturn() {
     },
     body: JSON.stringify({
       reference: 'ORD4MQ43R',
-      inbound_tracking: '1Z999AA10123457012',
       reason_class: 'other',
       reason_description: 'Defective Part',
       items: [
@@ -156,6 +158,23 @@ createReturn().catch(console.error);
 ```
 
 If `return_label` is omitted from the request, the response returns the created return reference and `label` will be `null`.
+
+### Manual Tracking Example
+If you are not generating a return label in this call, you may optionally supply an existing inbound tracking number:
+
+```json
+{
+  "reference": "ORD4MQ43R",
+  "inbound_tracking": "1Z999AA10123457012",
+  "reason_class": "other",
+  "items": [
+    {
+      "listing_id": 328398,
+      "qty": 1
+    }
+  ]
+}
+```
 
 ### Return Label Configuration
 Return labels use the partner-level defaults configured by ShopJimmy for your account:
