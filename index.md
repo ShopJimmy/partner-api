@@ -27,6 +27,7 @@ Fulfilled orders are invoiced electronically. Billing details on each order refe
 - [Request Order Cancellation](order-request-cancel.html)
 - [Order History](orders.html)
 - [Order Status](order-status.html)
+- [Webhooks](webhooks.html)
 - [Create Return](return.html)
 - [Credits](credits.html)
 - [Invoices](invoices.html)
